@@ -7,6 +7,7 @@ These macros are convientenly named `if-let*`, `when-let*`, `if-some*` and `when
 ## Usage
 
 Install in project.clj
+
 ![Clojars Project](http://clojars.org/lockedon/if-let/latest-version.svg)
 
 Usage is similar to their `clojure.core` counterpart.
