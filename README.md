@@ -6,9 +6,19 @@ These macros are convientenly named `if-let*`, `when-let*`, `if-some*` and `when
 
 ## Usage
 
-Update once on clojars.
+Install with [![Clojars Project](http://clojars.org/lockedon/if-let/latest-version.svg)]
 
 `[if-let.core :refer :all]`
+
+Usage is similar to their `clojure.core` counterpart.
+
+```clojure
+(if-let* [a 1
+          b 2]
+    (+ a b)
+    "false branch")
+;; => 3
+```
 
 ## License
 
