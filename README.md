@@ -1,6 +1,6 @@
 # if-let and Friends
 
-Are a set of macros to allow more than one binding for `if-let`, `when-let`, `if-some` and `when-some`.
+A set of macros to allow more than one binding for `if-let`, `when-let`, `if-some` and `when-some`.
 
 These macros are convientenly named `if-let*`, `when-let*`, `if-some*` and `when-some*`. The true branch of these macros are evaluated when all bindings pass the `if`/`some` condition.
 
