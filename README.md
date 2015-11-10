@@ -29,6 +29,41 @@ Require: `[if-let.core :refer :all]` in your namespace.
     (+ a b)
     "false branch")
 ;; => "false branch"
+
+
+(when-let* [a 1
+            b 2]
+    (+ a b))
+;; => 3
+
+(when-let* [a nil
+            b 2]
+    (+ a b))
+;; => nil
+
+
+(if-some* [a 1
+           b 2]
+    (+ a b)
+    "false branch")
+;; => 3
+
+(if-some* [a 1
+           b nil]
+    (+ a b)
+    "false branch")
+;; => "false branch"
+
+
+(when-some* [a 1
+             b 2]
+    (+ a b))
+;; => 3
+
+(when-some* [a nil
+             b 2]
+    (+ a b))
+;; => nil
 ```
 
 ## License
