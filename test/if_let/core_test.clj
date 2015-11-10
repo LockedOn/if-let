@@ -54,3 +54,63 @@
        2 (when-some* [[a b] [1 2]] b)
        false (when-some* [a false] a)
        nil (when-some* [a nil] (exception))))
+
+
+
+(deftest test-when-let*
+  (are [x y] (= x y)
+       1 (when-let* [a 1
+       				 b 2]
+           a)
+       2 (when-let* [a 1
+       				 b 2]
+           b)
+       nil (when-let* [a false
+       				   b 2]
+             (exception))
+       nil (when-let* [a 1
+       				   b false]
+             (exception))
+       ))
+
+(deftest test-if-let*
+  (are [x y] (= x y)
+       1 (if-let* [a 1
+       			   b 2]
+           a)
+       2 (if-let* [a 1
+       			   b 2]
+           b)
+       nil (if-let* [a false
+       				 b 2]
+             (exception))
+       nil (if-let* [a 1
+       				 b false]
+             (exception))
+       1 (if-let* [a false 
+       			   b true]
+           a 1)
+       1 (if-let* [a true 
+       			   b nil]
+             b 1)
+       1 (if-let* [a true 
+       			   b false]
+           (exception)
+           1)
+       ))
+
+(deftest test-if-some*
+  (are [x y] (= x y)
+       1 (if-some* [a 1 b 1] b)
+       false (if-some* [a true b false] b)
+       nil (if-some* [a true b nil] (exception))
+       3 (if-some* [a 1 b 2] (+ a b))
+       1 (if-some* [a 1 b nil] b 1)
+       1 (if-some* [a 1 b nil] (exception) 1)))
+
+(deftest test-when-some*
+  (are [x y] (= x y)
+       1 (when-some* [a 1 b 2] a)
+       2 (when-some* [a 1 b 2] b)
+       false (when-some* [a false b true] a)
+       nil (when-some* [a true b nil] (exception))))
