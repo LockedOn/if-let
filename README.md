@@ -68,7 +68,7 @@ Require: `[if-let.core :refer :all]` in your namespace.
 
 ## License
 
-Copyright © 2015 LockedOn
+Copyright © 2016 LockedOn
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
