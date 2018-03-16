@@ -13,7 +13,6 @@
   "bindings => binding-form test
   If test is true, evaluates then with binding-form bound to the value of
   test, if not, yields else"
-  {:added "1.0"}
   ([bindings then]
    `(if-let* ~bindings ~then nil))
   ([bindings then else & oldform]
@@ -34,7 +33,6 @@
 (defmacro let-pred
   "bindings => binding-form test
   If pred fails - the return the input to the pred."
-  {:added "1.0"}
   [pred bindings & body]
   (assert-args
    (vector? bindings) "a vector for its binding"
@@ -52,7 +50,6 @@
 (defmacro when-let*
   "bindings => binding-form test
   When test is true, evaluates body with binding-form bound to the value of test"
-  {:added "1.0"}
   [bindings & body]
   (assert-args
    (vector? bindings) "a vector for its binding"
@@ -70,7 +67,6 @@
   "bindings => binding-form test
    If test is not nil, evaluates then with binding-form bound to the
    value of test, if not, yields else"
-  {:added "1.6"}
   ([bindings then]
    `(if-some* ~bindings ~then nil))
   ([bindings then else & oldform]
@@ -92,7 +88,6 @@
   "bindings => binding-form test
    When test is not nil, evaluates body with binding-form bound to the
    value of test"
-  {:added "1.6"}
   [bindings & body]
   (assert-args
    (vector? bindings) "a vector for its binding"
@@ -111,7 +106,6 @@
   "When expr is passed by the predicate, threads it into the first form (via ->),
   and when that result is passed by the predicate, through the next etc,
   return the first failed expr"
-  {:added "1.5"}
   [pred expr & forms]
   (let [g (gensym)
         steps (map (fn [step] `(if (~pred ~g) (-> ~g ~step) ~g))
@@ -126,7 +120,6 @@
   "When expr is passed by the predicate, threads it into the first form (via ->>),
   and when that result is passed by the predicate, through the next etc,
   return the first failed expr"
-  {:added "1.5"}
   [pred expr & forms]
   (let [g (gensym)
         steps (map (fn [step] `(if (~pred ~g) (->> ~g ~step)  ~g))
