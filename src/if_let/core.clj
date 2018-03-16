@@ -106,3 +106,33 @@
            ~(if (seq more)
               `(when-some* ~more ~@body)
               `(do ~@body)))))))
+
+(defmacro pred->
+  "When expr is passed by the predicate, threads it into the first form (via ->),
+  and when that result is passed by the predicate, through the next etc,
+  return the first failed expr"
+  {:added "1.5"}
+  [pred expr & forms]
+  (let [g (gensym)
+        steps (map (fn [step] `(if (~pred ~g) (-> ~g ~step) ~g))
+                   forms)]
+    `(let [~g ~expr
+           ~@(interleave (repeat g) (butlast steps))]
+       ~(if (empty? steps)
+          g
+          (last steps)))))
+
+(defmacro pred->>
+  "When expr is passed by the predicate, threads it into the first form (via ->>),
+  and when that result is passed by the predicate, through the next etc,
+  return the first failed expr"
+  {:added "1.5"}
+  [pred expr & forms]
+  (let [g (gensym)
+        steps (map (fn [step] `(if (~pred ~g) (->> ~g ~step)  ~g))
+                   forms)]
+    `(let [~g ~expr
+           ~@(interleave (repeat g) (butlast steps))]
+       ~(if (empty? steps)
+          g
+          (last steps)))))

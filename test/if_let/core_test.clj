@@ -121,3 +121,19 @@
     :success (let-pred #(some? %) [a 1 b :karl] :success)
     :success (let-pred (fn [m] (some? m)) [a 1 b :karl] :success)
     3 (let-pred some? [a 1 b 2] (+ a b))))
+
+(deftest test-pred->
+  (are [x y] (= x y)
+    2 (pred-> some? 1 inc)
+    1 (pred-> nil? 1 inc)
+    3 (pred-> some? 1 inc inc)
+    3 (pred-> #(< % 3) 1 inc inc inc inc inc)))
+
+(deftest test-pred->>
+  (are [x y] (= x y)
+    2 (pred->> some? 1 inc)
+    1 (pred->> nil? 1 inc)
+    3 (pred->> some? 1 inc inc)
+    3 (pred->> #(< % 3) 1 inc inc inc inc inc)
+    9 (pred->> seq [1 2 3] (map inc) (reduce +))
+    '() (pred->> seq [1 2 3] (map #(* % 2)) (remove even?) (reduce +))))
